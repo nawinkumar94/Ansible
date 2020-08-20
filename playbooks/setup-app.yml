@@ -3,13 +3,29 @@
 ---
   - hosts: webservers
     become: true
+    vars:
+      path_to_app: "/var/www/html"
+
     tasks:
       - name: Upload the php file in the webserver
         copy:
           src: ../index.php
-          dest: /var/www/html
+          dest: "{{path_to_app}}"
           mode: 0755 
-      
+
+      - name: Creating a simple info page using Gathering facts
+        copy:
+          dest: "{{path_to_app}}/info.php"
+          content: "<h1> Info about the web servers {{ansible_hostname}} </h1>"
+
+      - name: See the directory content
+        command: ls -la {{path_to_app}}
+        register: dir_content
+
+      - name: Debug the directory contents
+        debug: 
+          msg: "{{dir_content}}"
+        
       - name: Configure php.ini file
         lineinfile:
           path: /etc/php.ini
