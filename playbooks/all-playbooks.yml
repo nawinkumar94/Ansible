@@ -1,0 +1,13 @@
+#all-playbooks.yml
+
+---
+  # Update all the yum packages for webservers and loadbalancers
+  - import_playbook: yum-update.yml
+  # Install all thes services apache and php for webservers and load balancers
+  - import_playbook: install-services.yml
+  # To setup our webservers and configure it
+  - import_playbook: setup-app.yml
+  # To setup our load balancers and configure it
+  - import_playbook: setup-lb.yml
+  # Check the status of the apache
+  - import_playbook: check-status.yml

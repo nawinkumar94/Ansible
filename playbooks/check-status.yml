@@ -1,0 +1,8 @@
+#check-status.yml
+
+---
+  - hosts: webservers:loadbalancers
+    become: true
+    tasks:
+      - name: Check the status of the apache
+        command: service httpd status
