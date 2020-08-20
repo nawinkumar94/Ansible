@@ -22,4 +22,7 @@
 
 # To get the OS type of the webservers and load balancers("uname.yml")
 
+----> Use this command to run the two tier system
+"ansible-playbook playbooks/all-playbooks.yml"
+
 # Ping all the servers (ping.yml)
